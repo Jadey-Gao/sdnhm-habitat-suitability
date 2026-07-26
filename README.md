@@ -3,23 +3,26 @@
 MaxEnt species distribution modeling for the San Diego Natural History Museum, built around
 *Bipes biporus* (Baja California worm lizard) on the Baja Peninsula.
 
-The repository ships two things:
+Two ways to run the same analysis:
 
-- **A two-notebook workflow** (`01_preprocessing.ipynb`, `02_maxent_modeling.ipynb`) that takes
-  occurrence records and environmental rasters through cleaning, variable selection, model
-  fitting, tuning, and map production.
-- **An ArcGIS Pro Python Toolbox** (`Toolbox/SDNHMMaxent.pyt`) that exposes the same three
-  stages as GUI tools for analysts who don't work in Jupyter.
+- **Notebooks** — `01_preprocessing.ipynb` and `02_maxent_modeling.ipynb`.
+- **ArcGIS Pro toolbox** — `Toolbox/SDNHMMaxent.pyt`, for analysts who don't work in Jupyter.
 
-Both front-ends call the same `sdnhm` package, so the notebook and the toolbox produce
-identical results.
+Both call the same `sdnhm` package, so they produce identical results.
 
 ---
 
+## Citation
+
+The occurrence points are based on Mahrdt et al. (2022). **Any use of them must credit:**
+
+> Mahrdt, C.R., K.R. Beaman, J.H.V. Villavicencio, and T.J. Papenfuss. 2022.
+> *Bipes biporus.* Catalogue of American Amphibians and Reptiles 930:1–39.
+
 ## Method
 
-Three candidate variable sets are carried through the whole pipeline in parallel and compared
-on the same held-out data:
+Three variable sets run through the whole pipeline in parallel and are compared on the same
+held-out data:
 
 | Set | Predictors |
 | --- | --- |
@@ -29,19 +32,15 @@ on the same held-out data:
 
 Pipeline stages:
 
-1. **Preprocessing** — reproject the study area, spatially thin occurrences to one record per
-   raster cell (museum records cluster near roads and towns; without thinning MaxEnt reads
-   sampling effort as habitat quality), then clip and align every raster to a common grid.
+1. **Preprocessing** — reproject the study area, thin occurrences to one per raster cell, then
+   clip and align every raster to a common grid.
+   - Thinning matters: museum records cluster near roads and towns. Without it, MaxEnt reads
+     sampling effort as habitat quality.
 2. **Variable selection** — correlation screening within each set to drop collinear predictors.
-3. **Default runs** — fit MaxEnt (`elapid`) per variable set, compare on test AUC and AICc.
+3. **Default runs** — fit MaxEnt (`elapid`) per variable set; compare on test AUC and AICc.
 4. **Tuning** — grid search over regularization and feature classes for the winning set.
 5. **Final model** — ROC, response curves, jackknife, and permutation importance.
 6. **Prediction** — continuous cloglog suitability raster plus a thresholded binary range map.
-
-## Results
-
-Outputs live in [`Modeled/`](Modeled/) — model comparison plots, diagnostics, and the two
-prediction rasters (`suitability_cloglog.tif`, `suitability_binary.tif`).
 
 ## Repository layout
 
@@ -68,12 +67,12 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-`Processed/` and `Modeled/` are committed, so `02_maxent_modeling.ipynb` runs end to end on a
-fresh clone. To re-run `01_preprocessing.ipynb` you need the raw environmental rasters, which
-are excluded from version control (~13 GB) and downloaded from the sources below.
-
-For the ArcGIS route, add `Toolbox/SDNHMMaxent.pyt` in the ArcGIS Pro Catalog pane. The three
-tools map onto the notebook stages and take the same inputs.
+- `Processed/` and `Modeled/` are committed, so `02_maxent_modeling.ipynb` runs end to end on a
+  fresh clone.
+- To re-run `01_preprocessing.ipynb` you need the raw environmental rasters. They are excluded
+  from version control (~13 GB) — download them from the sources below.
+- For the ArcGIS route, add `Toolbox/SDNHMMaxent.pyt` in the ArcGIS Pro Catalog pane. The three
+  tools match the notebook stages and take the same inputs.
 
 ## Data sources
 
@@ -82,11 +81,15 @@ tools map onto the notebook stages and take the same inputs.
 | BioClim | [WorldClim v2.1](https://www.worldclim.org/data/worldclim21.html) |
 | ENVIREM | [envirem.github.io](https://envirem.github.io/) |
 | Elevation | [USGS 3DEP](https://www.usgs.gov/3d-elevation-program) |
-| Occurrences | San Diego Natural History Museum collection records |
+| Occurrences | Mahrdt et al. 2022 (see [Citation](#citation)) |
 
 ## Adapting to another species
 
-The workflow is not hard-coded to *Bipes biporus*. In `01_preprocessing.ipynb`, edit §1.2
-(species name and input paths) and §1.4 (variable sets); §1.3 holds the CRS, target resolution,
-and study-area buffer. `02_maxent_modeling.ipynb` auto-discovers whatever notebook 1 produced.
-Cells marked `✎` are the ones intended to be edited.
+The workflow is not hard-coded to *Bipes biporus*. Cells marked `✎` are the ones meant to be
+edited:
+
+- **§1.2** — species name and input paths
+- **§1.3** — CRS, target resolution, study-area buffer
+- **§1.4** — variable sets
+
+`02_maxent_modeling.ipynb` auto-discovers whatever notebook 1 produced, so it needs no edits.
