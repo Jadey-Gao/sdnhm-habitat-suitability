@@ -1,0 +1,24 @@
+# ── Raw environmental rasters ────────────────────────────────────────────────
+# ~13 GB of public download-on-demand data. See README for sources.
+Raw Datasets/BioClim/
+Raw Datasets/Envirem/
+Raw Datasets/USGS_DEM_20250902/
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ── Jupyter ──────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Editors / tooling ────────────────────────────────────────────────────────
+.idea/
+.vscode/
+.claude/
+
+# ── OS cruft ─────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

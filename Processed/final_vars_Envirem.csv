@@ -1,0 +1,12 @@
+Variable,Filename,Source
+Annual_Potential_Evapotranspiration,Annual_Potential_Evapotranspiration.tif,Envirem
+EmbergerQ,EmbergerQ.tif,Envirem
+Min_Temp_of_Warmest_Period,Min_Temp_of_Warmest_Period.tif,Envirem
+Month_Count_Temp_above_10_C,Month_Count_Temp_above_10_C.tif,Envirem
+PET_Seasonality,PET_Seasonality.tif,Envirem
+PET_of_Coldest_Quarter,PET_of_Coldest_Quarter.tif,Envirem
+PET_of_Driest_Quarter,PET_of_Driest_Quarter.tif,Envirem
+PET_of_Warmest_Quarter,PET_of_Warmest_Quarter.tif,Envirem
+PET_of_Wettest_Quarter,PET_of_Wettest_Quarter.tif,Envirem
+Terrain_Ruggedness_Index,Terrain_Ruggedness_Index.tif,Envirem
+Topographic_Wetness_Index,Topographic_Wetness_Index.tif,Envirem
