@@ -12,13 +12,6 @@ Both call the same `sdnhm` package, so they produce identical results.
 
 ---
 
-## Citation
-
-The occurrence points are based on Mahrdt et al. (2022). **Any use of them must credit:**
-
-> Mahrdt, C.R., K.R. Beaman, J.H.V. Villavicencio, and T.J. Papenfuss. 2022.
-> *Bipes biporus.* Catalogue of American Amphibians and Reptiles 930:1–39.
-
 ## Method
 
 Three variable sets run through the whole pipeline in parallel and are compared on the same
@@ -74,14 +67,19 @@ jupyter lab
 - For the ArcGIS route, add `Toolbox/SDNHMMaxent.pyt` in the ArcGIS Pro Catalog pane. The three
   tools match the notebook stages and take the same inputs.
 
-## Data sources
+## Data sources & citation
 
 | Dataset | Source |
 | --- | --- |
 | BioClim | [WorldClim v2.1](https://www.worldclim.org/data/worldclim21.html) |
 | ENVIREM | [envirem.github.io](https://envirem.github.io/) |
 | Elevation | [USGS 3DEP](https://www.usgs.gov/3d-elevation-program) |
-| Occurrences | Mahrdt et al. 2022 (see [Citation](#citation)) |
+| Occurrences | Mahrdt et al. 2022 — see below |
+
+The occurrence points are based on Mahrdt et al. (2022). **Any use of them must credit:**
+
+> Mahrdt, C.R., K.R. Beaman, J.H.V. Villavicencio, and T.J. Papenfuss. 2022.
+> *Bipes biporus.* Catalogue of American Amphibians and Reptiles 930:1–39.
 
 ## Adapting to another species
 
